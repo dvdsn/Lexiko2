@@ -1,0 +1,78 @@
+#
+#	This is an example of a description file for averaging
+#	
+#	Lines beginning with '#' are comments
+#
+average {
+	name 		"Median nerve stimulation"
+#
+#	Output files
+#	The log file is useful for debugging and
+#	selection of interesting events using 'eventfile'
+#
+	outfile         MN.fif
+	logfile         MN.log
+#	eventfile	MN.eve
+#
+#	Rejection limits
+#
+#	stimIgnore is optional to omit a stimulus artefact from 
+#	the rejection
+#
+#	stimIgnore      10e-3
+	gradReject	2000e-13
+	magReject	3e-12
+	eogReject	150e-6
+#
+#	Additional rejection parameters
+#
+#	eegReject	20e-6
+#	ecgReject	10e-3
+#
+#	The first category follows
+#	
+#	'condition' can be used instead of 'category'
+#
+	category {
+#
+#		The name of the category (condition) to appear 
+#		in the output file
+#
+		name	"Right MN"
+#
+#		Trigger line transition from 0 -> 'event' defines 
+#		the zero time point
+#
+		event	1
+#
+#		'ignore' is a mask to apply to the trigger line
+#		before searching for 'event' (default = 0)
+#
+#		ignore	0
+		tmin	-0.2
+		tmax	1.0
+#
+#		Baseline setting
+#
+#		bmin    -0.2
+#		bmax    -0.02
+#
+#		Standard error of mean is computed only
+#		if the stderr parameter is present
+#
+#		stderr
+	}
+	category {
+		name	"Left MN"
+		event	2
+		tmin	-0.2
+		tmax	1.0
+	}
+	category {
+		name	"Both MNs"
+		event	3
+		ignore	0
+		tmin	-0.2
+		tmax	1.0
+	}
+}

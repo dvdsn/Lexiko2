@@ -1,0 +1,27 @@
+
+% Bandpass
+Fs = 1000;
+d = fdesign.bandpass('n,fc1,fc2', 500, 1, 40, Fs);
+Hd = design(d); 
+fvtool(Hd);
+
+
+% Low pass
+Fs = 250;
+d = fdesign.lowpass('N,Fc',45,40,Fs);
+Hd = design(d); 
+fvtool(Hd)
+
+
+% Highpass
+Fs = 250;
+d = fdesign.highpass('N,Fc', 5500, 0.1, Fs);
+Hd = design(d); 
+fvtool(Hd);
+
+
+
+% Save results
+B = Hd.Numerator;
+save  '-ascii' '-double' Config/hipass_ret.txt B
+

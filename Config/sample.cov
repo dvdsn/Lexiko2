@@ -1,0 +1,79 @@
+#
+#	This is an example of a description file for covariance matrix computation
+#	
+#	Lines beginning with '#' are comments
+#
+cov {
+	name 		"Median nerve stimulation"
+#
+#	Output files
+#	The log file is useful for debugging and
+#	selection of interesting events using 'eventfile'
+#
+	outfile         MN-cov.fif
+	logfile         MN-cov.log
+#	eventfile	MN.eve
+#
+#	Rejection limits
+#
+#	stimIgnore is optional to omit a stimulus artefact from 
+#	the rejection
+#
+#	stimIgnore      10e-3
+	gradReject	2000e-13
+	magReject	3e-12
+	eogReject	150e-6
+#
+#	Additional rejection parameters
+#
+#	eegReject	20e-6
+#	ecgReject	10e-3
+#
+#	The first definition follows
+#
+	def {
+#
+#		The name of the category (condition) is irrelevant 
+#		but useful as a comment
+#
+		name	"Right MN"
+#
+#		Trigger line transition from 0 -> 'event' defines 
+#		the zero time point
+#
+#		'event' can be left out to compute covariance matrix 
+#		from continuous data
+#
+		event	1
+#
+#		'ignore' is a mask to apply to the trigger line
+#		before searching for 'event' (default = 0)
+#
+#		ignore	0
+		tmin	-0.2
+		tmax	-0.02
+#
+#		Baseline settings is strongly recommended
+#		(does not have to be the same as 'tmin' and 'tmax')
+#
+		bmin    -0.2
+		bmax    -0.02
+	}
+	def {
+		name	"Left MN"
+		event	2
+		tmin	-0.2
+		tmax	-0.02
+		bmin    -0.2
+		bmax    -0.02
+	}
+	def {
+		name	"Both MNs"
+		event	3
+		ignore	0
+		tmin	-0.2
+		tmax	-0.02
+		bmin    -0.2
+		bmax    -0.02
+	}
+}

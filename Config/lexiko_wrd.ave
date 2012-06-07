@@ -1,0 +1,79 @@
+#
+#	This is a description file for averaging the lexiko experiment
+#	
+#	NOTE Lines beginning with '#' are comments
+#
+average {
+	name 		"Lexiko"
+#
+#	Output files
+#	The log file is useful for debugging and
+#	selection of interesting events using 'eventfile'
+#
+	outfile         Ave/lx13_wrd.fif
+	logfile         Ave/lx13_wrd.log
+#	eventfile	MN.eve
+#
+#	Rejection limits
+#
+#	stimIgnore is optional to omit a stimulus artefact from 
+#	the rejection
+#
+#	stimIgnore      10e-3
+	gradReject	2000e-13
+	magReject	3e-12
+	eogReject	150e-6
+#
+#	Additional rejection parameters
+#
+#	eegReject	20e-6
+#	ecgReject	10e-3
+#
+#	The first category follows
+#	
+#	NOTE 'condition' can be used instead of 'category'
+#
+	category {
+#
+#		The name of the category (condition) to appear 
+#		in the output file
+#
+		name	"EU"
+#
+#		Trigger line transition from 0 -> 'event' defines 
+#		the zero time point
+#
+		event	201
+#
+#		'ignore' is a mask to apply to the trigger line
+#		before searching for 'event' (default = 0)
+#
+#		ignore	0
+		tmin	-0.2
+		tmax	0.796
+#
+#		Baseline setting
+#
+		bmin    -0.2
+		bmax    -0.0
+#
+#		Standard error of mean is computed only
+#		if the stderr parameter is present
+#
+#		stderr
+	}
+	category {
+		name	"ES"
+		event	201
+		tmin	-0.2
+		tmax	0.796
+	}
+	category {
+		name	"Grand Average"
+		event	201
+		ignore	0
+		tmin	-0.2
+		tmax	0.796
+	}
+
+}
